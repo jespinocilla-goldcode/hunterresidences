@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CodeMirror: HTML5 preview</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/doc/docs.css">
+
+<link rel="stylesheet" href="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/lib/codemirror.css">
+<script src="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/lib/codemirror.js"></script>
+<script src="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/mode/xml/xml.js"></script>
+<script src="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/mode/javascript/javascript.js"></script>
+<script src="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/mode/css/css.js"></script>
+<script src="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/mode/htmlmixed/htmlmixed.js"></script>
+<style type="text/css">.CodeMirror {
+        float: left;
+        width: 50%;
+        border: 1px solid black;
+      }
+      iframe {
+        width: 49%;
+        float: left;
+        height: 300px;
+        border: 1px solid black;
+        border-left: 0px;
+      }</style>
+</head>
+<body>
+<div id="nav">
+  <a href="http://codemirror.net/"><h1>CodeMirror</h1>
+<img id="logo" src="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/doc/logo.png"></a>
+
+  <ul>
+    <li>
+<a href="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/index.html">Home</a>
+    </li>
+<li>
+<a href="https://jespinocilla-goldcode.github.io/hunterresidences/wp-content/plugins/mapster-wp-maps/includes/acf-code-field/js/codemirror-5.23.0/doc/manual.html">Manual</a>
+    </li>
+<li>
+<a href="https://github.com/codemirror/codemirror">Code</a>
+  </li>
+</ul>
+  <ul>
+    <li>
+<a class="active" href="#">HTML5 preview</a>
+  </li>
+</ul>
+</div>
+
+<article>
+<h2>HTML5 preview</h2>
+
+    <textarea id="code" name="code">
+
+
+  
+    <meta charset="utf-8">
+    <title>HTML5 canvas demo</title>
+    <style>p {font-family: monospace;}</style>
+  
+  
+    <p>Canvas pane goes here:</p>
+    <canvas id="pane" width="300" height="200"></canvas>
+    <script>var canvas = document.getElementById('pane');
+      var context = canvas.getContext('2d');
+
+      context.fillStyle = 'rgb(250,0,0)';
+      context.fillRect(10, 10, 55, 50);
+
+      context.fillStyle = 'rgba(0, 0, 250, 0.5)';
+      context.fillRect(30, 30, 55, 50);</script>
+  
+</textarea>
+    <iframe id="preview"></iframe>
+    <script>var delay;
+      // Initialize CodeMirror editor with a nice html5 canvas demo.
+      var editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+        mode: 'text/html'
+      });
+      editor.on("change", function() {
+        clearTimeout(delay);
+        delay = setTimeout(updatePreview, 300);
+      });
+      
+      function updatePreview() {
+        var previewFrame = document.getElementById('preview');
+        var preview =  previewFrame.contentDocument ||  previewFrame.contentWindow.document;
+        preview.open();
+        preview.write(editor.getValue());
+        preview.close();
+      }
+      setTimeout(updatePreview, 300);</script>
+  </article>
+</body>
+</html>
